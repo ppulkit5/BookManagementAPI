@@ -1,6 +1,7 @@
- 
+ require("dotenv").config();
  //Framework
  const express = require('express');
+ const mongoose = require('mongoose');
 
  //Database
  const database=require("./database/index");
@@ -10,6 +11,10 @@
 
  // Configurations
  app.use(express.json());
+
+ // Establish database connection
+ mongoose.connect(process.env.MONGO_URL)
+ .then(()=>console.log("Connection established!!!"));
  
  /*
  Route                /
