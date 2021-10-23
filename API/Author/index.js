@@ -75,11 +75,18 @@ Router.get('/:isbn', async (req, res) => {
  Method               POST
  */
  Router.post('/new', (req, res) => {
-    const {newAuthor} = req.body;
 
-    AuthorModel.create(newAuthor);
+    try{
+     
+     const {newAuthor} = req.body;
 
-    return  res.json({ message: "author was added"});
+       await AuthorModel.create(newAuthor);
+       
+     return  res.json({ message: "author was added"});
+    }
+    catch(error){
+        res.json({error : error.message });
+      }
 });
 
 

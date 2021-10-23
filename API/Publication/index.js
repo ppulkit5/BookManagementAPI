@@ -78,11 +78,18 @@ const PublicationModel = require("../../database/publication");
  Method               POST
  */
  Router.post('/new',async (req, res) => {
+
+    try{
+     
     const {newPublication} = req.body;
      
-    PublicationModel.create(newPublication);
+     await PublicationModel.create(newPublication);
 
     return  res.json({ message: "publication was added"});
+    }
+    catch(error){
+     res.json({error : error.message });
+    }
 });
 
 /*
